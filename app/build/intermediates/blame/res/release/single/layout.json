@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "F:\\AndroidStudioProjects\\printer1\\app\\build\\intermediates\\res\\merged\\release\\layout\\activity_main.xml",
+        "source": "F:\\AndroidStudioProjects\\printer1\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "F:\\AndroidStudioProjects\\printer1\\app\\build\\intermediates\\res\\merged\\release\\layout\\printer.xml",
+        "source": "F:\\AndroidStudioProjects\\printer1\\app\\src\\main\\res\\layout\\printer.xml"
+    }
+]
