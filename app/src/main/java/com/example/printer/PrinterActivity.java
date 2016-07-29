@@ -22,11 +22,15 @@ import java.io.InputStream;
  * @author yangsr
  * @time 2016年07月28日
  */
+/*
+"PrinterShare.v.11.0.0.apk"  破解版，包名加入.amazon
+ */
 public class PrinterActivity extends Activity implements OnClickListener {
     private Button prinrerBtn, btnAz;
     private final String FILE_NAME = "rfgcfhjcd.xls";
     private final String APK_NAME = "PrinterShare.v.11.0.0.apk";
     private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +49,15 @@ public class PrinterActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.button1:
                 if (appIsInstalled(context, "com.dynamixsoftware.printershare.amazon")) {
-
                     printer();
                 } else {
                     Toast.makeText(getApplication(), "软件未安装,先安装应用!", Toast.LENGTH_SHORT).show();
-                    if (copyApkFromAssets(this, APK_NAME, Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+APK_NAME)) {
+                    if (copyApkFromAssets(this, APK_NAME, Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + APK_NAME)) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.setDataAndType(
                                 Uri.parse("file://" + Environment.getExternalStorageDirectory()
-                                        .getAbsolutePath() + "/"+APK_NAME),
+                                        .getAbsolutePath() + "/" + APK_NAME),
                                 "application/vnd.android.package-archive");
                         startActivity(intent);
                         printer();
@@ -62,12 +65,12 @@ public class PrinterActivity extends Activity implements OnClickListener {
                 }
                 break;
             case R.id.btnAz:
-                if (copyApkFromAssets(this, APK_NAME, Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+APK_NAME)) {
+                if (copyApkFromAssets(this, APK_NAME, Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + APK_NAME)) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setDataAndType(
                             Uri.parse("file://" + Environment.getExternalStorageDirectory()
-                                    .getAbsolutePath() + "/"+APK_NAME),
+                                    .getAbsolutePath() + "/" + APK_NAME),
                             "application/vnd.android.package-archive");
                     startActivity(intent);
                 }
@@ -85,7 +88,7 @@ public class PrinterActivity extends Activity implements OnClickListener {
         }
         // 模板
         String aafileurl = Environment.getExternalStorageDirectory()
-                + "/inspection/"+FILE_NAME;
+                + "/inspection/" + FILE_NAME;
         // 调用printershare软件来打印该文件
         File picture = new File(aafileurl);
         Uri data_uri = Uri.fromFile(picture);
@@ -104,6 +107,7 @@ public class PrinterActivity extends Activity implements OnClickListener {
 
     /**
      * 将文件复制到SD卡，并返回该文件对应的数据库对象
+     *
      * @return
      * @throws IOException
      */
@@ -154,6 +158,7 @@ public class PrinterActivity extends Activity implements OnClickListener {
         }
     }
 
+    //复制文件到本地
     public boolean copyApkFromAssets(Context context, String fileName,
                                      String path) {
         boolean copyIsFinish = false;
