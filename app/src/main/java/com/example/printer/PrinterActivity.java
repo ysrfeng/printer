@@ -25,6 +25,7 @@ import java.io.InputStream;
 public class PrinterActivity extends Activity implements OnClickListener {
     private Button prinrerBtn, btnAz;
     private final String FILE_NAME = "rfgcfhjcd.xls";
+    private final String APK_NAME = "PrinterShare.v.11.0.0.apk";
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +44,17 @@ public class PrinterActivity extends Activity implements OnClickListener {
         // TODO Auto-generated method stub
         switch (v.getId()) {
             case R.id.button1:
-                if (appIsInstalled(context, "com.dynamixsoftware.printershare")) {
+                if (appIsInstalled(context, "com.dynamixsoftware.printershare.amazon")) {
 
                     printer();
                 } else {
                     Toast.makeText(getApplication(), "软件未安装,先安装应用!", Toast.LENGTH_SHORT).show();
-                    if (copyApkFromAssets(this, "PrinterShare-11.0.0.apk", Environment.getExternalStorageDirectory().getAbsolutePath() + "/PrinterShare-11.0.0.apk")) {
+                    if (copyApkFromAssets(this, APK_NAME, Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+APK_NAME)) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.setDataAndType(
                                 Uri.parse("file://" + Environment.getExternalStorageDirectory()
-                                        .getAbsolutePath() + "/PrinterShare-11.0.0.apk"),
+                                        .getAbsolutePath() + "/"+APK_NAME),
                                 "application/vnd.android.package-archive");
                         startActivity(intent);
                         printer();
@@ -61,12 +62,12 @@ public class PrinterActivity extends Activity implements OnClickListener {
                 }
                 break;
             case R.id.btnAz:
-                if (copyApkFromAssets(this, "PrinterShare-11.0.0.apk", Environment.getExternalStorageDirectory().getAbsolutePath() + "/PrinterShare-11.0.0.apk")) {
+                if (copyApkFromAssets(this, APK_NAME, Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+APK_NAME)) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setDataAndType(
                             Uri.parse("file://" + Environment.getExternalStorageDirectory()
-                                    .getAbsolutePath() + "/PrinterShare-11.0.0.apk"),
+                                    .getAbsolutePath() + "/"+APK_NAME),
                             "application/vnd.android.package-archive");
                     startActivity(intent);
                 }
@@ -92,7 +93,7 @@ public class PrinterActivity extends Activity implements OnClickListener {
             //String data_type = "application/msword";
             String data_type = "application/vnd.ms-excel";
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setPackage("com.dynamixsoftware.printershare");// 未注册之前com.dynamixsoftware.printershare，注册后加上amazon
+            i.setPackage("com.dynamixsoftware.printershare.amazon");// 未注册之前com.dynamixsoftware.printershare，注册后加上amazon
             i.setDataAndType(data_uri, data_type);
             startActivity(i);
         } catch (Exception e) {
@@ -157,7 +158,7 @@ public class PrinterActivity extends Activity implements OnClickListener {
                                      String path) {
         boolean copyIsFinish = false;
         try {
-            InputStream is = context.getAssets().open("PrinterShare-11.0.0.apk");
+            InputStream is = context.getAssets().open(APK_NAME);
             File file = new File(path);
             file.createNewFile();
             FileOutputStream fos = new FileOutputStream(file);
